@@ -4,10 +4,9 @@ import {DeleteIcon} from '../icons/table/delete-icon';
 import {EditIcon} from '../icons/table/edit-icon';
 import {EyeIcon} from '../icons/table/eye-icon';
 import {IconButton} from '../table/table.styled';
-import {UserDto} from "../../api";
 
 interface Props {
-   user: UserDto;
+   user: any;
    columnKey: string | React.Key;
 }
 

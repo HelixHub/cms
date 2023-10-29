@@ -2,12 +2,9 @@ import {Table} from '@nextui-org/react';
 import React, {useEffect, useState} from 'react';
 import {Box} from '../styles/box';
 import {RenderCell} from './render-cell';
-import {UserApi, UserDto} from '../../api';
-
+import api from '../../app/api';
 
 export const UserTable = () => {
-    const userApi = new UserApi();
-
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [columns, setColumns] = useState([
         {name: 'NAME', uid: 'name'},
@@ -16,28 +13,29 @@ export const UserTable = () => {
     ]);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [users, setUsers] = useState<UserDto[]>([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const token = localStorage.getItem('token');
             if (token) {
                 console.log(token);
-                userApi.userControllerGetUsers({
+                api.get('/v1/account/user/list', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 })
                 .then(usersResponse => {
+                    console.log(usersResponse.status);
+                    setUsers(usersResponse.data);
                     console.log(usersResponse);
-                    if (usersResponse.status === 200) {
-                        setUsers(usersResponse.data);
-                        console.log(usersResponse.data);
-                    }
+                })
+                .catch(error => {
+                    console.log(error);
                 })
             }
         }
-    }, [userApi]);
+    }, []);
 
     return (
         <Box

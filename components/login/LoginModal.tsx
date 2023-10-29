@@ -1,7 +1,6 @@
 import React, {CSSProperties, useState} from 'react';
 import { Input } from '@nextui-org/react';
-import { AuthApi } from '../../api';
-
+import api from '../../app/api'
 
 interface LoginModalProps {
     isOpen: boolean;
@@ -10,7 +9,6 @@ interface LoginModalProps {
 
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
-    const authApi = new AuthApi();
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [email, setEmail] = useState('');
@@ -23,16 +21,15 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
         e.preventDefault();
 
         try {
-            const response = await authApi.authControllerLogin({
+            const response = await api.post("/v1/auth/login", {
                 email: email,
                 password: password
             });
-
             if (response.status === 201) {
-                localStorage.setItem('token', response.data.accessToken);
+                localStorage.setItem('token', response.data.access_token);
                 window.location.reload();
             } else {
-                setError('No valid login.');
+                setError("This combination was not found!");
             }
         } catch (err) {
             setError('Ein Fehler ist aufgetreten.');
