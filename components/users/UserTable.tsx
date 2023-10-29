@@ -1,8 +1,8 @@
-import {Table, useClickAway} from '@nextui-org/react';
+import {Table} from '@nextui-org/react';
 import React, {useEffect, useState} from 'react';
 import {Box} from '../styles/box';
 import {RenderCell} from './render-cell';
-import {UserApi} from '../../generated-client/api';
+import {UserApi, UserDto} from '../../api';
 
 
 export const UserTable = () => {
@@ -12,30 +12,32 @@ export const UserTable = () => {
     const [columns, setColumns] = useState([
         {name: 'NAME', uid: 'name'},
         {name: 'GROUP', uid: 'group'},
-        {name: 'EMAIL', uid: 'email'},
         {name: 'ACTIONS', uid: 'actions'},
     ]);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState<UserDto[]>([]);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const token = localStorage.getItem('token');
             if (token) {
+                console.log(token);
                 userApi.userControllerGetUsers({
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 })
                 .then(usersResponse => {
+                    console.log(usersResponse);
                     if (usersResponse.status === 200) {
                         setUsers(usersResponse.data);
+                        console.log(usersResponse.data);
                     }
                 })
             }
         }
-    }, []);
+    }, [userApi]);
 
     return (
         <Box

@@ -1,6 +1,6 @@
 import React, {CSSProperties, useState} from 'react';
 import { Input } from '@nextui-org/react';
-import { AuthApi } from '../../generated-client/api';
+import { AuthApi } from '../../api';
 
 
 interface LoginModalProps {
@@ -29,7 +29,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
             });
 
             if (response.status === 201) {
-                localStorage.setItem('token', response.data.access_token);
+                localStorage.setItem('token', response.data.accessToken);
                 window.location.reload();
             } else {
                 setError('No valid login.');

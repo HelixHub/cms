@@ -3,47 +3,32 @@ import React from 'react';
 import {DeleteIcon} from '../icons/table/delete-icon';
 import {EditIcon} from '../icons/table/edit-icon';
 import {EyeIcon} from '../icons/table/eye-icon';
-import {users} from '../table/data';
-import {IconButton, StyledBadge} from '../table/table.styled';
+import {IconButton} from '../table/table.styled';
+import {UserDto} from "../../api";
 
 interface Props {
-   user: typeof users[number];
+   user: UserDto;
    columnKey: string | React.Key;
 }
 
 export const RenderCell = ({user, columnKey}: Props) => {
    // @ts-ignore
-   const cellValue = user[columnKey];
    switch (columnKey) {
       case 'name':
          return (
-            <User squared src={user.avatar} name={cellValue} css={{p: 0}}>
+            <User squared src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" name={user.name} css={{p: 0}}>
                {user.email}
             </User>
          );
-      case 'role':
+      case 'group':
          return (
             <Col>
                <Row>
                   <Text b size={14} css={{tt: 'capitalize'}}>
-                     {cellValue}
-                  </Text>
-               </Row>
-               <Row>
-                  <Text
-                     b
-                     size={13}
-                     css={{tt: 'capitalize', color: '$accents7'}}
-                  >
-                     {user.team}
+                     {user.group?.name}
                   </Text>
                </Row>
             </Col>
-         );
-      case 'status':
-         return (
-            // @ts-ignore
-            <StyledBadge type={String(user.status)}>{cellValue}</StyledBadge>
          );
 
       case 'actions':
@@ -84,7 +69,5 @@ export const RenderCell = ({user, columnKey}: Props) => {
                </Col>
             </Row>
          );
-      default:
-         return cellValue;
    }
 };
