@@ -13,7 +13,7 @@ import {Flex} from '../styles/flex';
 import {TableWrapper} from '../table/table';
 import {AddUser} from './add-user';
 
-export const Accounts = () => {
+export const Users = () => {
    return (
       <Flex
          css={{
@@ -31,22 +31,19 @@ export const Accounts = () => {
             <Crumb>
                <HouseIcon />
                <Link href={'/'}>
-                  <CrumbLink href="#">Home</CrumbLink>
+                  <CrumbLink href="/">Dashboard</CrumbLink>
                </Link>
                <Text>/</Text>
             </Crumb>
 
             <Crumb>
                <UsersIcon />
-               <CrumbLink href="#">Users</CrumbLink>
+               <CrumbLink href="/users">Users</CrumbLink>
                <Text>/</Text>
-            </Crumb>
-            <Crumb>
-               <CrumbLink href="#">List</CrumbLink>
             </Crumb>
          </Breadcrumbs>
 
-         <Text h3>All Accounts</Text>
+         <Text h3>All User Accounts</Text>
          <Flex
             css={{gap: '$8'}}
             align={'center'}
@@ -65,16 +62,9 @@ export const Accounts = () => {
                   css={{width: '100%', maxW: '410px'}}
                   placeholder="Search users"
                />
-               <SettingsIcon />
-               <TrashIcon />
-               <InfoIcon />
-               <DotsIcon />
             </Flex>
             <Flex direction={'row'} css={{gap: '$6'}} wrap={'wrap'}>
                <AddUser />
-               <Button auto iconRight={<ExportIcon />}>
-                  Export to CSV
-               </Button>
             </Flex>
          </Flex>
 

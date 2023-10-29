@@ -49,18 +49,19 @@ export const SidebarWrapper = () => {
             >
                <Sidebar.Body className="body sidebar">
                   <SidebarItem
-                     title="Home"
+                     title="Dashboard"
                      icon={<HomeIcon />}
                      isActive={router.pathname === '/'}
                      href="/"
                   />
-                  <SidebarMenu title="Main Menu">
+                  <SidebarMenu title="Company Menu">
                      <SidebarItem
-                        isActive={router.pathname === '/accounts'}
-                        title="Accounts"
+                        isActive={router.pathname === '/users'}
+                        title="Users"
                         icon={<AccountsIcon />}
-                        href="accounts"
+                        href="users"
                      />
+                     {/*}
                      <SidebarItem
                         isActive={router.pathname === '/payments'}
                         title="Payments"
@@ -87,9 +88,11 @@ export const SidebarWrapper = () => {
                         title="Reports"
                         icon={<ReportsIcon />}
                      />
+                     {*/}
                   </SidebarMenu>
 
-                  <SidebarMenu title="General">
+                  {/*}
+                  <SidebarMenu title="Settings">
                      <SidebarItem
                         isActive={router.pathname === '/developers'}
                         title="Developers"
@@ -114,8 +117,10 @@ export const SidebarWrapper = () => {
                         icon={<ChangeLogIcon />}
                      />
                   </SidebarMenu>
+                  {*/}
                </Sidebar.Body>
                <Sidebar.Footer>
+                  {/*}
                   <Tooltip content={'Settings'} rounded color="primary">
                      <SettingsIcon />
                   </Tooltip>
@@ -128,6 +133,7 @@ export const SidebarWrapper = () => {
                         size={'sm'}
                      />
                   </Tooltip>
+                  {*/}
                </Sidebar.Footer>
             </Flex>
          </Sidebar>
