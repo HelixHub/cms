@@ -3,6 +3,8 @@ import type {AppProps} from 'next/app';
 import {createTheme, NextUIProvider} from '@nextui-org/react';
 import {ThemeProvider as NextThemesProvider} from 'next-themes';
 import {Layout} from '../components/layout/layout';
+import { useEffect, useState } from 'react';
+import LoginModal from "../components/login/LoginModal";
 
 const lightTheme = createTheme({
    type: 'light',
@@ -19,6 +21,14 @@ const darkTheme = createTheme({
 });
 
 function MyApp({Component, pageProps}: AppProps) {
+   const [isModalOpen, setModalOpen] = useState(false);
+   useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+         setModalOpen(true);
+      }
+   }, []);
+
    return (
       <NextThemesProvider
          defaultTheme="system"
@@ -30,6 +40,7 @@ function MyApp({Component, pageProps}: AppProps) {
       >
          <NextUIProvider>
             <Layout>
+               <LoginModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
                <Component {...pageProps} />
             </Layout>
          </NextUIProvider>
