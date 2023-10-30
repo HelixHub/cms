@@ -41,7 +41,13 @@ export const UserDropdown = () => {
                Help & Feedback
             </Dropdown.Item>
             <Dropdown.Item key="logout" withDivider color="error">
-               Log Out
+               <div onClick={ () => {
+                  localStorage.removeItem('token');
+                  window.location.reload();
+               }
+               }>
+                  Log out
+               </div>
             </Dropdown.Item>
             <Dropdown.Item key="switch" withDivider>
                <DarkModeSwitch />
