@@ -30,56 +30,57 @@ export const LanguagesTable = () => {
             }
         }
     }, []);
-
-    return (
-        <Box
-            css={{
-                '& .nextui-table-container': {
-                    boxShadow: 'none',
-                },
-            }}
-        >
-            <Table
-                aria-label="The user table"
+    if (languages.length > 0) {
+        return (
+            <Box
                 css={{
-                    height: 'auto',
-                    minWidth: '100%',
-                    boxShadow: 'none',
-                    width: '100%',
-                    px: 0,
+                    '& .nextui-table-container': {
+                        boxShadow: 'none',
+                    },
                 }}
-                selectionMode="multiple"
             >
-                <Table.Header columns={columns}>
-                    {(column) => (
-                        <Table.Column
-                            key={column.uid}
-                            hideHeader={column.uid === 'actions'}
-                            align={column.uid === 'actions' ? 'center' : 'start'}
-                        >
-                            {column.name}
-                        </Table.Column>
-                    )}
-                </Table.Header>
-                <Table.Body items={languages}>
-                    {(item: any) => (
-                        <Table.Row key={item.languageCode}>
-                            {(columnKey) => (
-                                <Table.Cell>
-                                    {RenderCell({language: item, columnKey: columnKey})}
-                                </Table.Cell>
-                            )}
-                        </Table.Row>
-                    )}
-                </Table.Body>
-                <Table.Pagination
-                    shadow
-                    noMargin
-                    align="center"
-                    rowsPerPage={8}
-                    onPageChange={(page) => console.log({page})}
-                />
-            </Table>
-        </Box>
-    );
+                <Table
+                    aria-label="The user table"
+                    css={{
+                        height: 'auto',
+                        minWidth: '100%',
+                        boxShadow: 'none',
+                        width: '100%',
+                        px: 0,
+                    }}
+                    selectionMode="multiple"
+                >
+                    <Table.Header columns={columns}>
+                        {(column) => (
+                            <Table.Column
+                                key={column.uid}
+                                hideHeader={column.uid === 'actions'}
+                                align={column.uid === 'actions' ? 'center' : 'start'}
+                            >
+                                {column.name}
+                            </Table.Column>
+                        )}
+                    </Table.Header>
+                    <Table.Body items={languages}>
+                        {(item: any) => (
+                            <Table.Row key={item.languageCode}>
+                                {(columnKey) => (
+                                    <Table.Cell>
+                                        {RenderCell({language: item, columnKey: columnKey})}
+                                    </Table.Cell>
+                                )}
+                            </Table.Row>
+                        )}
+                    </Table.Body>
+                    <Table.Pagination
+                        shadow
+                        noMargin
+                        align="center"
+                        rowsPerPage={15}
+                        onPageChange={(page) => console.log({page})}
+                    />
+                </Table>
+            </Box>
+        );
+    }
 };
