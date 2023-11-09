@@ -2,7 +2,12 @@ import {Avatar, Dropdown, Navbar, Text} from '@nextui-org/react';
 import React from 'react';
 import {DarkModeSwitch} from './darkmodeswitch';
 
-export const UserDropdown = () => {
+type UserDropdownProps = {
+   userName?: string;
+   email?: string;
+};
+
+export const UserDropdown: React.FC<UserDropdownProps> = ({ userName, email }) => {
    return (
       <Dropdown placement="bottom-right">
          <Navbar.Item>
@@ -20,12 +25,15 @@ export const UserDropdown = () => {
             aria-label="User menu actions"
             onAction={(actionKey) => console.log({actionKey})}
          >
-            <Dropdown.Item key="profile" css={{height: '$18'}}>
+            <Dropdown.Item key="profile" css={{height: '$19'}}>
                <Text b color="inherit" css={{d: 'flex'}}>
                   Signed in as
                </Text>
                <Text b color="inherit" css={{d: 'flex'}}>
-                  zoey@example.com
+                  {userName ? userName : 'Login failed'}
+               </Text>
+               <Text color="inherit" css={{d: 'flex'}}>
+                  {email ? email : ''}
                </Text>
             </Dropdown.Item>
             <Dropdown.Item key="settings" withDivider>

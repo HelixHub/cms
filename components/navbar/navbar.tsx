@@ -14,6 +14,11 @@ interface Props {
    children: React.ReactNode;
 }
 
+type UserDropdownProps = {
+   userName?: string;
+   email?: string;
+};
+
 export const NavbarWrapper = ({children}: Props) => {
    const collapseItems = [
       'Profile',
@@ -117,7 +122,10 @@ export const NavbarWrapper = ({children}: Props) => {
                   </Link>
                </Navbar.Content>
                <Navbar.Content>
-                  <UserDropdown />
+                  <UserDropdown
+                     userName={'Coming soon'}
+                     email={'test@helixhub.info'}
+                   />
                </Navbar.Content>
             </Navbar.Content>
 

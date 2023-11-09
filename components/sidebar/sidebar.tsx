@@ -5,22 +5,12 @@ import {Avatar, Tooltip} from '@nextui-org/react';
 import {Flex} from '../styles/flex';
 import {CompaniesDropdown} from './companies-dropdown';
 import {HomeIcon} from '../icons/sidebar/home-icon';
-import {PaymentsIcon} from '../icons/sidebar/payments-icon';
-import {BalanceIcon} from '../icons/sidebar/balance-icon';
 import {AccountsIcon} from '../icons/sidebar/accounts-icon';
-import {CustomersIcon} from '../icons/sidebar/customers-icon';
-import {ProductsIcon} from '../icons/sidebar/products-icon';
-import {ReportsIcon} from '../icons/sidebar/reports-icon';
-import {DevIcon} from '../icons/sidebar/dev-icon';
-import {ViewIcon} from '../icons/sidebar/view-icon';
-import {SettingsIcon} from '../icons/sidebar/settings-icon';
-import {CollapseItems} from './collapse-items';
 import {SidebarItem} from './sidebar-item';
 import {SidebarMenu} from './sidebar-menu';
-import {FilterIcon} from '../icons/sidebar/filter-icon';
 import {useSidebarContext} from '../layout/layout-context';
-import {ChangeLogIcon} from '../icons/sidebar/changelog-icon';
 import {useRouter} from 'next/router';
+import {FeedbackIcon} from "../icons/navbar/feedback-icon";
 
 export const SidebarWrapper = () => {
    const router = useRouter();
@@ -59,7 +49,7 @@ export const SidebarWrapper = () => {
                         isActive={router.pathname === '/users'}
                         title="Users"
                         icon={<AccountsIcon />}
-                        href="users"
+                        href="/users"
                      />
                      {/*}
                      <SidebarItem
@@ -90,7 +80,14 @@ export const SidebarWrapper = () => {
                      />
                      {*/}
                   </SidebarMenu>
-
+                  <SidebarMenu title="Descriptions">
+                     <SidebarItem
+                         isActive={router.pathname === '/descriptions/languages'}
+                         title="Languages"
+                         icon={<FeedbackIcon />}
+                         href="/descriptions/languages"
+                     />
+                  </SidebarMenu>
                   {/*}
                   <SidebarMenu title="Settings">
                      <SidebarItem

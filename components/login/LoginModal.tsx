@@ -27,7 +27,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
             });
             if (response.status === 201) {
                 localStorage.setItem('token', response.data.access_token);
-                window.location.reload();
             } else {
                 setError("This combination was not found!");
             }
