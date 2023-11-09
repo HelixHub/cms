@@ -89,5 +89,9 @@ export const UserTable = () => {
                 </Table>
             </Box>
         );
+    } else {
+        return(
+            <></>
+        )
     }
 };

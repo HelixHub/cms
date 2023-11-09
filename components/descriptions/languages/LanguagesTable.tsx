@@ -82,5 +82,9 @@ export const LanguagesTable = () => {
                 </Table>
             </Box>
         );
+    } else {
+        return(
+            <></>
+        )
     }
 };
