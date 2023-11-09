@@ -9,6 +9,7 @@ RUN npm install
 
 COPY . .
 RUN npm run build
+RUN npx browserslist@latest --update-db
 
 ENV NODE_ENV $NODE_ENV
 RUN addgroup --system --gid 1001 nodejs
