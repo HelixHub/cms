@@ -57,6 +57,7 @@ export const AddLanguage = () => {
             });
             if (response.status === 201) {
                 closeHandler();
+                window.location.reload();
             } else {
                 console.log(response.status, response.statusText);
             }

@@ -15,19 +15,20 @@ export const LanguagesTable = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [languages, setLanguages] = useState([]);
 
+    const updateTable = () => {
+      api.get('/v1/language')
+        .then(languagesResponse => {
+          console.log(languagesResponse.status);
+          setLanguages(languagesResponse.data);
+        })
+        .catch(error => {
+          console.log(error);
+        })
+    };
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            const token = localStorage.getItem('token');
-            if (token) {
-                api.get('/v1/language', {})
-                    .then(languagesResponse => {
-                        console.log(languagesResponse.status);
-                        setLanguages(languagesResponse.data);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    })
-            }
+            updateTable();
         }
     }, []);
     if (languages.length > 0) {

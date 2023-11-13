@@ -3,6 +3,7 @@ import React from 'react';
 import {DeleteIcon} from '../../icons/table/delete-icon';
 import {EditIcon} from '../../icons/table/edit-icon';
 import {IconButton} from '../../table/table.styled';
+import api from "../../../app/api";
 
 interface Props {
    language: any;
@@ -10,6 +11,24 @@ interface Props {
 }
 
 export const RenderCell = ({language, columnKey}: Props) => {
+   const deleteLanguage = (languageCode: string) => {
+      const token = localStorage.getItem('token');
+      if (token) {
+         api.delete('/v1/language/' + languageCode, {
+            headers: {
+               'Authorization': `Bearer ${token}`
+            }
+         })
+           .then(languagesResponse => {
+              console.log(languagesResponse.status);
+              window.location.reload();
+           })
+           .catch(error => {
+              console.log(error);
+           })
+      }
+   };
+
    // @ts-ignore
    switch (columnKey) {
       case 'code':
@@ -53,7 +72,10 @@ export const RenderCell = ({language, columnKey}: Props) => {
                   <Tooltip
                      content="Delete language"
                      color="error"
-                     onClick={() => console.log('Delete language', language.languageCode)}
+                     onClick={() => {
+                        console.log('Delete language', language.languageCode);
+                        deleteLanguage(language.languageCode);
+                     }}
                   >
                      <IconButton>
                         <DeleteIcon size={20} fill="#FF0080" />
